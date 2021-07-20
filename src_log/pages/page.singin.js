@@ -1,9 +1,9 @@
 const { Button, Input } = require('../elements');
 
-class singInPage{
+class SingInPage{
 	constructor (){
-		this.passwordField = new Input('input[name="password"]');
-    	this.retryPasswordField = new Input('input[name="retypePassword"]');
+		this.emailField = new Input('input[name="email"]');
+    	this.passwordField = new Input('input[name="password"]');
 
 		this.submitButton = new Button('button');
 	};
@@ -16,4 +16,4 @@ async methodSingIn({email, password}) {
 };
 };
 
-module.exports = { singInPage };
+module.exports = { SingInPage };

@@ -1,6 +1,7 @@
 const { expect } = require('chai');
-
+const { App } = require('../src_log/pages');
 const rundomNumber = () => Date.now();
+const app = new App();
 
 describe('change profile data:', function () {
   beforeEach(async function (){
@@ -12,9 +13,12 @@ describe('change profile data:', function () {
 	await browser.reloadSession();
   });	
 
-  xit('should be able to change of patient`s profile data', async function () {
-	
-	const emailField = await $('input[name="email"]');
+  it('should be able to change of patient`s profile data', async function () {
+	await app.singInPage.methodSingIn({
+      email: 'gv_lviv@i.ua',
+      password: '12345678',
+    });
+/*	const emailField = await $('input[name="email"]');
 	const passwordField = await $('input[name="password"]');
 	
 	const signIpButton = await $('button');
@@ -26,7 +30,7 @@ describe('change profile data:', function () {
 	await passwordField.setValue('12345678');
 	
 	await signIpButton.waitForDisplayed({ timeout: 5000 });
-    await signIpButton.click();
+    await signIpButton.click(); */
 	
 	const menuProfPat = await $('a.link_link__3zEN3[href="/user-profile/3c3e7b16-d429-4765-a2b0-1e02716c2fa3"]');
 	await menuProfPat.waitForDisplayed({ timeout: 5000 });
@@ -65,16 +69,12 @@ describe('change profile data:', function () {
   });
   
  it('should be able to change the specialty and clinic', async function () {
-    // *перехід по url
-  // *заповненя форми входу як лікар
-  // *натиснути на кнопку вхід 
-  // *клікнути на пункт меню "My Profile"
-  // внести зміни в поля спеціальність та назва клініки
-  // клікнути кнопку "Save"
-  // клікнути на пункт меню "Doctors"
-  // перевірка результату
-	
-	const emailField = await $('input[name="email"]');
+    it('should be able to change of patient`s profile data', async function () {
+	await app.singInPage.methodSingIn({
+      email: 'luchka2205@gmail.com',
+      password: '12345678',
+    });
+/*	const emailField = await $('input[name="email"]');
 	const passwordField = await $('input[name="password"]');
 	
 	const signIpButton = await $('button');
@@ -86,8 +86,7 @@ describe('change profile data:', function () {
 	await passwordField.setValue('12345678');
 	
 	await signIpButton.waitForDisplayed({ timeout: 5000 });
-    await signIpButton.click();
-	await browser.pause(2000);
+    await signIpButton.click();  */
 		
 	const menuProfDoc = await $('a.link_link__3zEN3=My Profile');
 	await menuProfDoc.waitForDisplayed({ timeout: 5000 });

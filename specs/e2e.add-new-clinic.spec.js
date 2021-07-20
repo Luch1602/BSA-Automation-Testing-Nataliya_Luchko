@@ -7,6 +7,9 @@ const { expect } = require('chai');
 // *заповнити поля форми
 // клікнути кнопку "Add"
 // перевірка результату
+const { App } = require('../src_log/pages');
+const rundomNumber = () => Date.now();
+const app = new App();
 
 const rundomNumber = () => Date.now();
 
@@ -22,10 +25,14 @@ describe('add the new clinic', function () {
 	
   it('should be able to add the new clinic', async function () {
     
-	const emailField = await $('input[name="email"]');
+	await app.singInPage.methodSingIn({
+      email: 'gv_lviv@i.ua',
+      password: '12345678',
+    });
+/*	const emailField = await $('input[name="email"]');
 	const passwordField = await $('input[name="password"]');
 	
-	const signInButton = await $('button');
+	const signInButton = await $('button');  
 	
 	await emailField.waitForDisplayed({ timeout: 5000 });
 	await emailField.setValue('john_admin2@admin.com');
@@ -34,26 +41,26 @@ describe('add the new clinic', function () {
 	await passwordField.setValue('Pa55word');
 	
 	await signInButton.waitForDisplayed({ timeout: 5000 });
-    await signInButton.click();
+    await signInButton.click();  */
 	
-	const menuProfil = await $('a.link_link__3zEN3=Clinics');
+	await app.mainPage.methodMainPage();
+/*	const menuProfil = await $('a.link_link__3zEN3=Clinics');
 	await menuProfil.waitForDisplayed({ timeout: 5000 });
-    await menuProfil.click();
+    await menuProfil.click(); */
 	
-	const addButton = await $('button.styles_primary-dark__1WnyR');
+	await app.clinicPage.methodClinic();
+/*	const addButton = await $('button.styles_primary-dark__1WnyR');
 	await addButton.waitForDisplayed({ timeout: 5000 });
-    await addButton.click();
+    await addButton.click(); */
 
-	const clinNameField = await $('input[name="name"]');
-	const clinAddressField = await $('input[name="address"]');
 	const suff= rundomNumber();
-	await clinNameField.waitForDisplayed({ timeout: 5000 });
-    await clinNameField.setValue('Clinic-'+suff);
-	
-	await clinAddressField.waitForDisplayed({ timeout: 5000 });
-    await clinAddressField.setValue('Street-'+suff);
-	
-	const arrSel = await $$('div.selectStyles__control');
+	await app.addClinicPage.methodAddClinic({
+      name: 'Clinic-'+suff,
+      address: 'Street-'+suff,
+      status: 'private',
+      sity: 'Boston, MA',
+    });
+/*	const arrSel = await $$('div.selectStyles__control');
 	const statusField = arrSel[0];
 	const sityField = arrSel[1];
 	
@@ -72,14 +79,11 @@ describe('add the new clinic', function () {
     await sityOption.waitForDisplayed({ timeout: 5000 });
     await sityOption.click();
 	
-	
 	const addButton1 = await $('button.styles_btn___s1BB[type="submit"]');
 	await addButton1.waitForDisplayed({ timeout: 5000 });
-    await addButton1.click();
+    await addButton1.click(); */
 	
-	await browser.pause(1000);
-	
-	
+		
 /*	await browser.waitUntil(
       async function () {
         const newClinic = $('span.styles_title__3xRcc=Delta');
