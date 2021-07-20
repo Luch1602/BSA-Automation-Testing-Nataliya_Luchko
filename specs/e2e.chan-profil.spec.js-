@@ -1,0 +1,148 @@
+const { expect } = require('chai');
+
+const rundomNumber = () => Date.now();
+
+describe('change profile data:', function () {
+  beforeEach(async function (){
+	await browser.setWindowSize(1440, 960);
+	await browser.url('/sign-in');
+});
+
+  afterEach(async function (){
+	await browser.reloadSession();
+  });	
+
+  xit('should be able to change of patient`s profile data', async function () {
+	
+	const emailField = await $('input[name="email"]');
+	const passwordField = await $('input[name="password"]');
+	
+	const signIpButton = await $('button');
+	
+	await emailField.waitForDisplayed({ timeout: 5000 });
+	await emailField.setValue('gv_lviv@i.ua');
+	
+	await passwordField.waitForDisplayed({ timeout: 5000 });
+	await passwordField.setValue('12345678');
+	
+	await signIpButton.waitForDisplayed({ timeout: 5000 });
+    await signIpButton.click();
+	
+	const menuProfPat = await $('a.link_link__3zEN3[href="/user-profile/3c3e7b16-d429-4765-a2b0-1e02716c2fa3"]');
+	await menuProfPat.waitForDisplayed({ timeout: 5000 });
+    await menuProfPat.click();
+	
+	const penButton = await $('button.styles_edit__ftuHl');
+	await penButton.waitForDisplayed({ timeout: 5000 });
+    await penButton.click();
+
+	const usernameField = await $('input[name="name"]');
+	const surnameField = await $('input[name="surname"]');
+	const suff= rundomNumber();
+	await usernameField.waitForDisplayed({ timeout: 5000 });
+    await usernameField.setValue('Nata-'+suff);
+	await surnameField.waitForDisplayed({ timeout: 5000 });
+//    await surnameField.setValue('Test-'+suff);
+	await surnameField.setValue('Luchka');
+	await browser.pause(3000);
+	
+	const editButton = await $('button[type="submit"]');
+	await editButton.waitForDisplayed({ timeout: 5000 });
+    await editButton.click();
+	await browser.pause(3000);
+	
+/*	await browser.waitUntil(
+      async function () {
+        const patientSurName = $('input[name="surname"]');
+    	expect(patientSurName).toHaveValueContaining('Luchka');
+      },
+      { timeout: 5000 },
+    );
+	
+	const patientSurName = $('input[name="surname"]');
+    expect(patientSurName).toHaveValueContaining('Luchka'); */
+
+  });
+  
+ it('should be able to change the specialty and clinic', async function () {
+    // *перехід по url
+  // *заповненя форми входу як лікар
+  // *натиснути на кнопку вхід 
+  // *клікнути на пункт меню "My Profile"
+  // внести зміни в поля спеціальність та назва клініки
+  // клікнути кнопку "Save"
+  // клікнути на пункт меню "Doctors"
+  // перевірка результату
+	
+	const emailField = await $('input[name="email"]');
+	const passwordField = await $('input[name="password"]');
+	
+	const signIpButton = await $('button');
+	
+	await emailField.waitForDisplayed({ timeout: 5000 });
+	await emailField.setValue('luchka2205@gmail.com');
+	
+	await passwordField.waitForDisplayed({ timeout: 5000 });
+	await passwordField.setValue('12345678');
+	
+	await signIpButton.waitForDisplayed({ timeout: 5000 });
+    await signIpButton.click();
+	await browser.pause(2000);
+		
+	const menuProfDoc = await $('a.link_link__3zEN3=My Profile');
+	await menuProfDoc.waitForDisplayed({ timeout: 5000 });
+    await menuProfDoc.click();
+	await browser.pause(2000);
+		
+	const ddls = await $$('div.selectStyles__single-value');
+
+    const specialDdl = ddls[0];
+    const clinicDdl = ddls[1];
+
+    const dentistValue = await $('div.selectStyles__single-value=dentist');
+    const HospitalValue = await $('div.selectStyles__single-value=Duke University Hospital');
+
+	await specialDdl.waitForDisplayed({ timeout: 5000 });
+    await specialDdl.click();
+
+    await dentistValue.waitForDisplayed({ timeout: 5000 });
+    await dentistValue.click();
+
+	await clinicDdl.waitForDisplayed({ timeout: 5000 });
+    await clinicDdl.click();
+
+    await HospitalValue.waitForDisplayed({ timeout: 5000 });
+    await HospitalValue.click();
+
+    const saveBut = await $$('button[type="submit"]');
+	const saveBut1 = saveBut[0];
+	const saveBut2 = saveBut[1];
+	
+	await saveBut1.waitForDisplayed({ timeout: 5000 });
+    await saveBut1.click();
+	await saveBut2.waitForDisplayed({ timeout: 5000 });
+    await saveBut2.click();
+
+	await menuDoctor.waitForDisplayed({ timeout: 5000 });
+    await menuDoctor.click();
+
+	await browser.pause(5000);
+  //------------------------	
+	const nameDoctor=await $('span.styles_name__2vTNE');
+	console.log(nameDoctor);
+	
+/*	await browser.waitUntil(
+      async function () {
+        const url = await browser.getUrl();
+        return url === 'http://46.101.234.121/doctors';
+      },
+      { timeout: 5000 },
+    );
+	
+	const url = await browser.getUrl();
+    expect(url).to.be.eql('http://46.101.234.121/doctors'); */
+
+  });
+
+});
+

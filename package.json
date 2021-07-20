@@ -1,21 +1,30 @@
 {
-    "name": "wdio-sample",
-    "version": "1.0.0",
-    "description": "",
-    "scripts": {
-        "test": "./node_modules/.bin/wdio wdio.conf.js"
-    },
-    "author": "",
-    "license": "MIT",
-    "dependencies": {
-        "@wdio/cli": "^7.5.1",
-        "chai": "^4.3.4"
-    },
-    "devDependencies": {
-        "@wdio/local-runner": "^7.7.4",
-        "@wdio/mocha-framework": "^7.7.4",
-        "@wdio/spec-reporter": "^7.7.3",
-        "chromedriver": "^91.0.1",
-        "wdio-chromedriver-service": "^7.1.1"
-    }
+  "name": "wdio-sample",
+  "version": "1.0.0",
+  "description": "- Install NodeJS LTS Version.\r  - Any IDE for example VSCode.\r  - Install/Update Chrome Browser to latest stable version.",
+  "scripts": {
+    "test": "wdio wdio.conf.js"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@wdio/cli": "^7.5.1",
+    "chai": "^4.3.4"
+  },
+  "devDependencies": {
+    "@wdio/local-runner": "^7.7.4",
+    "@wdio/mocha-framework": "^7.7.4",
+    "@wdio/spec-reporter": "^7.7.3",
+    "chromedriver": "^91.0.1",
+    "wdio-chromedriver-service": "^7.1.1"
+  },
+  "main": "wdio.conf.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Luch1602/BSA-Automation-Testing-Nataliya_Luchko.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Luch1602/BSA-Automation-Testing-Nataliya_Luchko/issues"
+  },
+  "homepage": "https://github.com/Luch1602/BSA-Automation-Testing-Nataliya_Luchko#readme"
 }

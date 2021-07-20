@@ -10,12 +10,18 @@ const { expect } = require('chai');
 
 const rundomNumber = () => Date.now();
 
-describe('Add the new clinic:', function () {
-
-  it('should be able to add the new clinic', async function () {
-    await browser.setWindowSize(1440, 960);
+describe('add the new clinic', function () {
+  beforeEach(async function (){
+	await browser.setWindowSize(1440, 960);
 	await browser.url('/sign-in');
+  });
 
+  afterEach(async function (){
+	await browser.reloadSession();
+  });	
+	
+  it('should be able to add the new clinic', async function () {
+    
 	const emailField = await $('input[name="email"]');
 	const passwordField = await $('input[name="password"]');
 	
@@ -30,20 +36,14 @@ describe('Add the new clinic:', function () {
 	await signInButton.waitForDisplayed({ timeout: 5000 });
     await signInButton.click();
 	
-	await browser.pause(2000);
-	
 	const menuProfil = await $('a.link_link__3zEN3=Clinics');
 	await menuProfil.waitForDisplayed({ timeout: 5000 });
     await menuProfil.click();
-
-	await browser.pause(2000);
 	
 	const addButton = await $('button.styles_primary-dark__1WnyR');
 	await addButton.waitForDisplayed({ timeout: 5000 });
     await addButton.click();
 
-	await browser.pause(2000);
-	
 	const clinNameField = await $('input[name="name"]');
 	const clinAddressField = await $('input[name="address"]');
 	const suff= rundomNumber();
@@ -53,17 +53,17 @@ describe('Add the new clinic:', function () {
 	await clinAddressField.waitForDisplayed({ timeout: 5000 });
     await clinAddressField.setValue('Street-'+suff);
 	
-	const arrSel = await $$('div.selectStyles__value-container');
+	const arrSel = await $$('div.selectStyles__control');
 	const statusField = arrSel[0];
 	const sityField = arrSel[1];
 	
-	const statusOption = await $('div.selectStyles__value-container=private');
-    const sityOption = await $('div.selectStyles__value-container=boston, MA');
+	const statusOption = await $('div.selectStyles__option=private');
+    const sityOption = await $('div.selectStyles__option=Boston, MA');
 	
 	await statusField.waitForDisplayed({ timeout: 5000 });
     await statusField.click();
 
-    await statusOption.waitForDisplayed({ timeout: 5000 });
+    await statusOption.waitForDisplayed({ timeout: 10000 });
     await statusOption.click();
 
     await sityField.waitForDisplayed({ timeout: 5000 });
@@ -72,26 +72,26 @@ describe('Add the new clinic:', function () {
     await sityOption.waitForDisplayed({ timeout: 5000 });
     await sityOption.click();
 	
-	const addButton1 = await $('button[type="submit"]');
+	
+	const addButton1 = await $('button.styles_btn___s1BB[type="submit"]');
 	await addButton1.waitForDisplayed({ timeout: 5000 });
     await addButton1.click();
 	
-	await browser.pause(5000);
+	await browser.pause(1000);
 	
 	
 /*	await browser.waitUntil(
       async function () {
-        const url = await browser.getUrl();
-        return url === 'http://46.101.234.121/doctors';
+        const newClinic = $('span.styles_title__3xRcc=Delta');
+	    expect(newClinic).toExist();
       },
       { timeout: 5000 },
     );
 	
-	const url = await browser.getUrl();
-    expect(url).to.be.eql('http://46.101.234.121/doctors'); */
+	const newClinic = $('span.styles_title__3xRcc=Delta');
+    expect(newClinic).toExist();
+*/
+  });	
 
-	await browser.reloadSession();
-  });
-  
 });
 
